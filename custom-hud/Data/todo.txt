@@ -1,0 +1,44 @@
+ToDo-List:
+
+	Co-Op Support:
+	
+		ScaleWithDistanceToPlayer
+			uses the camera position now, not the enemy position.
+			This might result in the enemy panels being too smal when the players are far apart.
+		
+		ShowEnemyPanelsOnlyOnVisibleContact
+			uses the player1 position, this would result in weird behavior
+			when Co-Op is enabled. Maybe use the camera position or check for each character?
+			Last option will bring the performance to its knees.
+
+		ShowEnemyPanelsAlsoForAllies
+			could get confused in Co-Op since players can be on the same team, or on different teams.
+			
+		The order of the boolean checks (scale with distance, show on player, ...) matters in Co-Op since
+		enemies can be on different teams.
+		
+		Add Option to show only player 1, all players, or none on Co-Op.
+
+
+	Enemy Panels:
+	
+		Fix the statusbar panel jittering by getting the intermediate coordinates between frames. But how?
+		
+		Place the panels perfectly on the head of the enemies considering their size and species.
+		Could use the bone position but that would result in the jittering talked above.
+
+
+
+Possible Future Endeavours (in no special order):
+
+	Damage Numbers
+	Extending it to a full on tactical combat mod
+	
+	More player styles
+
+
+
+Warning:
+
+	Using .setElement on guiHUD.getMain() will conflict with an other element that set itself there already.
+	That's the reason why we use addFloatingElement throughout the whole mod.

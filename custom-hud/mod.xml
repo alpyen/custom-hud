@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<Mod>
+	<Id>custom-hud</Id>
+	<Name>Custom HUD</Name>
+	<Category>Mod</Category>
+	<Author>_Ins4ne_ (alpines)</Author>
+	<Description>
+		Shows various status information about you and the enemies!
+		Now includes healthbars too!
+		Customize everything to your liking and improve your combat skills!
+		Open the settings with CTRL+H. Disabled during dialogues.
+		Please leave some feedback on the workshop page and leave a like if you enjoy the mod!
+	</Description>
+	<Version>2.1.0</Version>
+	<Thumbnail>Data/Images/custom-hud/mod-thumb.jpg</Thumbnail>
+	<PreviewImage>Data/Images/custom-hud/mod-full.jpg</PreviewImage>
+	<Tag>HUD</Tag>
+	<Tag>Custom</Tag>
+	<Tag>Script</Tag>
+	<SupportedVersion>*</SupportedVersion>
+	<NeedsRestart>false</NeedsRestart>
+	<LevelHookFile>Data/Scripts/custom-hud/LevelScripts/custom-hud.as</LevelHookFile>
+</Mod> 
