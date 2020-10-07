@@ -65,7 +65,7 @@ void Update(int is_paused)
 	if (!bEnableCustomHUD) return;
 	
 	// Check if the player ID is valid, if not get a new one.
-	if (iPlayerID == -1 || !ObjectExists(iPlayerID) || !ReadCharacterID(iPlayerID).controlled || ReadCharacterID(iPlayerID).controller_id != 0)
+	if (iPlayerID == -1 || !ObjectExists(iPlayerID) || ReadObjectFromID(iPlayerID).GetType() != _movement_object || !ReadCharacterID(iPlayerID).controlled || ReadCharacterID(iPlayerID).controller_id != 0)
 	{
 		// So we need to check for one criteria if we don't find any.
 		iPlayerID = -1;
