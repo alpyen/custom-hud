@@ -1,6 +1,6 @@
 const string S_MOD_ID = "custom-hud";
 const string S_MOD_NAME = "Custom HUD";
-const string S_MOD_VERSION = "2.1.0";
+const string S_MOD_VERSION = "2.1.2";
 
 const string S_SETTINGS_PREFIX = S_MOD_ID + "-";
 

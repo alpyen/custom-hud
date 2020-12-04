@@ -61,7 +61,7 @@ class StandardCustomHudEnemyPanel : Panel
 				continue;
 			}
 			
-			if (bEnemyShowEnemyPanelsOnlyWithinCertainRangeOfEnemies && distance(camera.GetPos(), ciCharacter.moCharacter.position) >= 15.0f)
+			if ((bEnemyScaleWithDistanceToPlayer || bEnemyShowEnemyPanelsOnlyWithinCertainRangeOfEnemies) && distance(camera.GetPos(), ciCharacter.moCharacter.position) >= 15.0f)
 			{
 				if (panelEnemy.bVisible) panelEnemy.SetVisibility(false);
 				continue;
@@ -73,7 +73,9 @@ class StandardCustomHudEnemyPanel : Panel
 				continue;
 			}
 			
-			// Only necessary if dead characters are revived.
+			// Necessary for enemies that got revived and also necessary
+			// if panels need to be reactivated again because they have been disabled
+			// by the conditions above.
 			if (!panelEnemy.bVisible && !ciCharacter.bDead)
 			{
 				panelEnemy.SetVisibility(true);
