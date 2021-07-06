@@ -392,8 +392,10 @@ void ImGui_CustomHudEnemySettings()
 }
 
 void ImGui_CustomHudCustomColorSettings()
-{	
-	ImGui_Checkbox("Use static color (only high color) instead of color gradient", bCustomColorsUseStaticColorInsteadOfColorGradient);
+{
+	const int CUSTOM_COLORS_COLOR_EDIT_FLAG = ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha | ImGuiColorEditFlags_NoLabel;
+
+	ImGui_Checkbox(" Use static color (only high color) instead of color gradient", bCustomColorsUseStaticColorInsteadOfColorGradient);
 	ImGui_NewLine();
 	
 	ImGui_Text("Health:");		
@@ -402,23 +404,25 @@ void ImGui_CustomHudCustomColorSettings()
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Player - Low (0%), Medium (50%), High (100%):     ");
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsHealthPlayer[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		
+		ImGui_ColorEdit4("Player Health Low (0%)", colorsCustomColorsHealthPlayer[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsHealthPlayer[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_ColorEdit4("Player Health Medium (50%)", colorsCustomColorsHealthPlayer[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsHealthPlayer[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_ColorEdit4("Player Health High (100%)", colorsCustomColorsHealthPlayer[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Enemy  - Low (0%), Medium (50%), High (100%):     ");
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsHealthEnemy[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
-		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsHealthEnemy[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
-		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsHealthEnemy[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
-		ImGui_SameLine();
-		ImGui_Button("Copy from Player");
 		
+		ImGui_ColorEdit4("Enemy Health Low (0%)", colorsCustomColorsHealthEnemy[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("Enemy Health Medium (50%)", colorsCustomColorsHealthEnemy[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("Enemy Health High (100%)", colorsCustomColorsHealthEnemy[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_SameLine();
+		if (ImGui_Button("Player Health")) colorsCustomColorsHealthEnemy = colorsCustomColorsHealthPlayer;
+		ImGui_SetTooltipOnHover("Copies the Player Health colors onto the enemy ones.");
 		
 	ImGui_Unindent();
 	ImGui_NewLine();
@@ -429,22 +433,25 @@ void ImGui_CustomHudCustomColorSettings()
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Player - Low (0%), Medium (50%), High (100%):     ");
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsBloodPlayer[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		
+		ImGui_ColorEdit4("Player Blood Low (0%)", colorsCustomColorsBloodPlayer[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsBloodPlayer[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_ColorEdit4("Player Blood Medium (50%)", colorsCustomColorsBloodPlayer[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsBloodPlayer[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_ColorEdit4("Player Blood High (100%)", colorsCustomColorsBloodPlayer[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Enemy  - Low (0%), Medium (50%), High (100%):     ");
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsBloodEnemy[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		
+		ImGui_ColorEdit4("Enemy Blood Low (0%)", colorsCustomColorsBloodEnemy[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsBloodEnemy[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_ColorEdit4("Enemy Blood Medium (50%)", colorsCustomColorsBloodEnemy[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsBloodEnemy[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_ColorEdit4("Enemy Blood High (100%)", colorsCustomColorsBloodEnemy[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_Button("Copy from Player");
+		if (ImGui_Button("Player Blood")) colorsCustomColorsBloodEnemy = colorsCustomColorsBloodPlayer;
+		ImGui_SetTooltipOnHover("Copies the Player Blood colors onto the enemy ones.");
 		
 	ImGui_Unindent();
 	ImGui_NewLine();
@@ -455,22 +462,25 @@ void ImGui_CustomHudCustomColorSettings()
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Player - Low (0%), Medium (50%), High (100%):     ");
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsKOShieldPlayer[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		
+		ImGui_ColorEdit4("Player KO Shield Low (0%)", colorsCustomColorsKOShieldPlayer[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsKOShieldPlayer[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_ColorEdit4("Player KO Shield Medium (50%)", colorsCustomColorsKOShieldPlayer[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsKOShieldPlayer[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_ColorEdit4("Player KO Shield High (100%)", colorsCustomColorsKOShieldPlayer[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Enemy  - Low (0%), Medium (50%), High (100%):     ");
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsKOShieldEnemy[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		
+		ImGui_ColorEdit4("Enemy KO Shield Low (0%)", colorsCustomColorsKOShieldEnemy[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsKOShieldEnemy[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_ColorEdit4("Enemy KO Shield Medium (50%)", colorsCustomColorsKOShieldEnemy[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsKOShieldEnemy[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_ColorEdit4("Enemy KO Shield High (100%)", colorsCustomColorsKOShieldEnemy[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_Button("Copy from Player");
+		if (ImGui_Button("Player KO Shield")) colorsCustomColorsKOShieldEnemy = colorsCustomColorsKOShieldPlayer;
+		ImGui_SetTooltipOnHover("Copies the Player KO Shield colors onto the enemy ones.");
 		
 	ImGui_Unindent();
 	ImGui_NewLine();
@@ -479,18 +489,30 @@ void ImGui_CustomHudCustomColorSettings()
 	ImGui_Indent();
 		
 		ImGui_AlignTextToFramePadding();
-		ImGui_Text("Player - Low (0u/s), Medium (4u/s), High (15u/s): ");
+		ImGui_Text("Player - Low (0u/s), Medium (5u/s), High (20u/s): ");
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsVelocityPlayer[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		
+		ImGui_ColorEdit4("Player Velocity Low (0u/s)", colorsCustomColorsVelocityPlayer[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsVelocityPlayer[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_ColorEdit4("Player Velocity Medium (5u/s)", colorsCustomColorsVelocityPlayer[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("", colorsCustomColorsVelocityPlayer[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_ColorEdit4("Player Velocity High (20u/s)", colorsCustomColorsVelocityPlayer[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		
 	ImGui_Unindent();
 	ImGui_NewLine();
 	
-	ImGui_Button("Reset all colors to default");
+	if (ImGui_Button("Reset all colors to default")) {
+		colorsCustomColorsHealthPlayer = COLORS_DEFAULT_HEALTH;
+		colorsCustomColorsHealthEnemy = COLORS_DEFAULT_HEALTH;
+		
+		colorsCustomColorsBloodPlayer = COLORS_DEFAULT_BLOOD;
+		colorsCustomColorsBloodEnemy = COLORS_DEFAULT_BLOOD;
+		
+		colorsCustomColorsKOShieldPlayer = COLORS_DEFAULT_KOSHIELD;
+		colorsCustomColorsKOShieldEnemy = COLORS_DEFAULT_KOSHIELD;
+		
+		colorsCustomColorsVelocityPlayer = COLORS_DEFAULT_VELOCITY;
+	}
 }
 
 void ImGui_CustomHudAboutAndHelp()

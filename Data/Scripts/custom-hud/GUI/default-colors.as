@@ -35,5 +35,5 @@ const array<vec4> COLORS_DEFAULT_KOSHIELD = {
 const array<vec4> COLORS_DEFAULT_VELOCITY = {
 	vec4(1.0f, 1.0f, 1.0f, 1.0f),
 	vec4(1.0f, 1.0f, 0.0f, 1.0f),
-	vec4(1.0f, 0.5f, 0.0f, 1.0f)
+	vec4(1.0f, 0.3f, 0.0f, 1.0f)
 };
