@@ -50,7 +50,7 @@ void Init(string level_name)
 }
 
 void Update(int is_paused)
-{	
+{
 	// Is CTRL+H pressed for the settings window? Save settings if window is closed.
 	if ((GetInputDown(0, "lctrl") || GetInputDown(0, "rctrl")) && GetInputPressed(0, "h"))
 	{

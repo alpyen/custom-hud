@@ -393,7 +393,7 @@ void ImGui_CustomHudEnemySettings()
 
 void ImGui_CustomHudCustomColorSettings()
 {
-	const int CUSTOM_COLORS_COLOR_EDIT_FLAG = ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha | ImGuiColorEditFlags_NoLabel;
+	const int I_CUSTOM_COLORS_COLOR_EDIT_FLAG = ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha | ImGuiColorEditFlags_NoLabel;
 
 	ImGui_Checkbox(" Use static color (only high color) instead of color gradient", bCustomColorsUseStaticColorInsteadOfColorGradient);
 	ImGui_NewLine();
@@ -405,21 +405,21 @@ void ImGui_CustomHudCustomColorSettings()
 		ImGui_Text("Player - Low (0%), Medium (50%), High (100%):     ");
 		ImGui_SameLine();
 		
-		ImGui_ColorEdit4("Player Health Low (0%)", colorsCustomColorsHealthPlayer[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Player Health Low (0%)", colorsCustomColorsHealthPlayer[0], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Player Health Medium (50%)", colorsCustomColorsHealthPlayer[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Player Health Medium (50%)", colorsCustomColorsHealthPlayer[1], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Player Health High (100%)", colorsCustomColorsHealthPlayer[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Player Health High (100%)", colorsCustomColorsHealthPlayer[2], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Enemy  - Low (0%), Medium (50%), High (100%):     ");
 		ImGui_SameLine();
 		
-		ImGui_ColorEdit4("Enemy Health Low (0%)", colorsCustomColorsHealthEnemy[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Enemy Health Low (0%)", colorsCustomColorsHealthEnemy[0], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Enemy Health Medium (50%)", colorsCustomColorsHealthEnemy[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Enemy Health Medium (50%)", colorsCustomColorsHealthEnemy[1], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Enemy Health High (100%)", colorsCustomColorsHealthEnemy[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Enemy Health High (100%)", colorsCustomColorsHealthEnemy[2], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
 		if (ImGui_Button("Player Health")) colorsCustomColorsHealthEnemy = colorsCustomColorsHealthPlayer;
 		ImGui_SetTooltipOnHover("Copies the Player Health colors onto the enemy ones.");
@@ -434,21 +434,21 @@ void ImGui_CustomHudCustomColorSettings()
 		ImGui_Text("Player - Low (0%), Medium (50%), High (100%):     ");
 		ImGui_SameLine();
 		
-		ImGui_ColorEdit4("Player Blood Low (0%)", colorsCustomColorsBloodPlayer[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Player Blood Low (0%)", colorsCustomColorsBloodPlayer[0], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Player Blood Medium (50%)", colorsCustomColorsBloodPlayer[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Player Blood Medium (50%)", colorsCustomColorsBloodPlayer[1], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Player Blood High (100%)", colorsCustomColorsBloodPlayer[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Player Blood High (100%)", colorsCustomColorsBloodPlayer[2], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Enemy  - Low (0%), Medium (50%), High (100%):     ");
 		ImGui_SameLine();
 		
-		ImGui_ColorEdit4("Enemy Blood Low (0%)", colorsCustomColorsBloodEnemy[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Enemy Blood Low (0%)", colorsCustomColorsBloodEnemy[0], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Enemy Blood Medium (50%)", colorsCustomColorsBloodEnemy[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Enemy Blood Medium (50%)", colorsCustomColorsBloodEnemy[1], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Enemy Blood High (100%)", colorsCustomColorsBloodEnemy[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Enemy Blood High (100%)", colorsCustomColorsBloodEnemy[2], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
 		if (ImGui_Button("Player Blood")) colorsCustomColorsBloodEnemy = colorsCustomColorsBloodPlayer;
 		ImGui_SetTooltipOnHover("Copies the Player Blood colors onto the enemy ones.");
@@ -463,21 +463,21 @@ void ImGui_CustomHudCustomColorSettings()
 		ImGui_Text("Player - Low (0%), Medium (50%), High (100%):     ");
 		ImGui_SameLine();
 		
-		ImGui_ColorEdit4("Player KO Shield Low (0%)", colorsCustomColorsKOShieldPlayer[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Player KO Shield Low (0%)", colorsCustomColorsKOShieldPlayer[0], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Player KO Shield Medium (50%)", colorsCustomColorsKOShieldPlayer[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Player KO Shield Medium (50%)", colorsCustomColorsKOShieldPlayer[1], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Player KO Shield High (100%)", colorsCustomColorsKOShieldPlayer[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Player KO Shield High (100%)", colorsCustomColorsKOShieldPlayer[2], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		
 		ImGui_AlignTextToFramePadding();
 		ImGui_Text("Enemy  - Low (0%), Medium (50%), High (100%):     ");
 		ImGui_SameLine();
 		
-		ImGui_ColorEdit4("Enemy KO Shield Low (0%)", colorsCustomColorsKOShieldEnemy[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Enemy KO Shield Low (0%)", colorsCustomColorsKOShieldEnemy[0], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Enemy KO Shield Medium (50%)", colorsCustomColorsKOShieldEnemy[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Enemy KO Shield Medium (50%)", colorsCustomColorsKOShieldEnemy[1], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Enemy KO Shield High (100%)", colorsCustomColorsKOShieldEnemy[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Enemy KO Shield High (100%)", colorsCustomColorsKOShieldEnemy[2], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
 		if (ImGui_Button("Player KO Shield")) colorsCustomColorsKOShieldEnemy = colorsCustomColorsKOShieldPlayer;
 		ImGui_SetTooltipOnHover("Copies the Player KO Shield colors onto the enemy ones.");
@@ -492,11 +492,11 @@ void ImGui_CustomHudCustomColorSettings()
 		ImGui_Text("Player - Low (0u/s), Medium (5u/s), High (20u/s): ");
 		ImGui_SameLine();
 		
-		ImGui_ColorEdit4("Player Velocity Low (0u/s)", colorsCustomColorsVelocityPlayer[0], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Player Velocity Low (0u/s)", colorsCustomColorsVelocityPlayer[0], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Player Velocity Medium (5u/s)", colorsCustomColorsVelocityPlayer[1], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Player Velocity Medium (5u/s)", colorsCustomColorsVelocityPlayer[1], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		ImGui_SameLine();
-		ImGui_ColorEdit4("Player Velocity High (20u/s)", colorsCustomColorsVelocityPlayer[2], CUSTOM_COLORS_COLOR_EDIT_FLAG);
+		ImGui_ColorEdit4("Player Velocity High (20u/s)", colorsCustomColorsVelocityPlayer[2], I_CUSTOM_COLORS_COLOR_EDIT_FLAG);
 		
 	ImGui_Unindent();
 	ImGui_NewLine();
@@ -599,6 +599,7 @@ void SaveSettings()
 	
 	SetConfigValueBool(S_SETTINGS_PREFIX + "bShowTooltipsInTheSettingsWindow", bShowTooltipsInTheSettingsWindow);
 	
+	
 	// Player Information
 	SetConfigValueInt(S_SETTINGS_PREFIX + "iPlayerPanelStyle", iPlayerPanelStyle);
 	SetConfigValueBool(S_SETTINGS_PREFIX + "bPlayerDisplayHealthPercentage", bPlayerDisplayHealthPercentage);
@@ -616,6 +617,7 @@ void SaveSettings()
 	SetConfigValueFloat(S_SETTINGS_PREFIX + "fPlayerPanelTransparency", fPlayerPanelTransparency);
 	
 	SetConfigValueString(S_SETTINGS_PREFIX + "sPlayerHudOrder", join(aPlayerHudOrder, "|"));
+	
 	
 	// Enemy Information
 	SetConfigValueBool(S_SETTINGS_PREFIX + "bEnemyDisplayHealthPercentage", bEnemyDisplayHealthPercentage);
@@ -635,6 +637,41 @@ void SaveSettings()
 	
 	SetConfigValueString(S_SETTINGS_PREFIX + "sEnemyHudOrder", join(aEnemyHudOrder, "|"));
 	
+	
+	// Custom Colors
+	SetConfigValueBool(S_SETTINGS_PREFIX + "bCustomColorsUseStaticColorInsteadOfColorGradient", bCustomColorsUseStaticColorInsteadOfColorGradient);
+	
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsHealthPlayerLow", colorsCustomColorsHealthPlayer[0]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsHealthPlayerMedium", colorsCustomColorsHealthPlayer[1]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsHealthPlayerHigh", colorsCustomColorsHealthPlayer[2]);
+	
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsHealthEnemyLow", colorsCustomColorsHealthEnemy[0]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsHealthEnemyMedium", colorsCustomColorsHealthEnemy[1]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsHealthEnemyHigh", colorsCustomColorsHealthEnemy[2]);
+	
+	
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsBloodPlayerLow", colorsCustomColorsBloodPlayer[0]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsBloodPlayerMedium", colorsCustomColorsBloodPlayer[1]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsBloodPlayerHigh", colorsCustomColorsBloodPlayer[2]);
+	
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsBloodEnemyLow", colorsCustomColorsBloodEnemy[0]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsBloodEnemyMedium", colorsCustomColorsBloodEnemy[1]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsBloodEnemyHigh", colorsCustomColorsBloodEnemy[2]);
+	
+	
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsKOShieldPlayerLow", colorsCustomColorsKOShieldPlayer[0]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsKOShieldPlayerMedium", colorsCustomColorsKOShieldPlayer[1]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsKOShieldPlayerHigh", colorsCustomColorsKOShieldPlayer[2]);
+	
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsKOShieldEnemyLow", colorsCustomColorsKOShieldEnemy[0]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsKOShieldEnemyMedium", colorsCustomColorsKOShieldEnemy[1]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsKOShieldEnemyHigh", colorsCustomColorsKOShieldEnemy[2]);
+	
+	
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsVelocityPlayerLow", colorsCustomColorsVelocityPlayer[0]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsVelocityPlayerMedium", colorsCustomColorsVelocityPlayer[1]);
+	SetConfigValueVec4(S_SETTINGS_PREFIX + "colorsCustomColorsVelocityPlayerHigh", colorsCustomColorsVelocityPlayer[2]);
+	
 	SaveConfig();
 }
 
@@ -653,6 +690,7 @@ void LoadSettings()
 	GetConfigValueBoolIfKeyExists("bShowDuringDialogues", bShowDuringDialogues);
 	
 	GetConfigValueBoolIfKeyExists("bShowTooltipsInTheSettingsWindow", bShowTooltipsInTheSettingsWindow);
+	
 	
 	// Player Information
 	GetConfigValueIntIfKeyExists("iPlayerPanelStyle", iPlayerPanelStyle, 0, int(A_PLAYER_PANEL_STYLES.length() - 1), 0);
@@ -695,6 +733,7 @@ void LoadSettings()
 		if (!bValidHudOrder) aPlayerHudOrder = { "Health", "Blood", "KO Shield", "Velocity" };
 	}
 	
+	
 	// Enemy Information
 	GetConfigValueBoolIfKeyExists("bEnemyDisplayHealthPercentage", bEnemyDisplayHealthPercentage);
 	GetConfigValueBoolIfKeyExists("bEnemyDisplayBloodPercentage", bEnemyDisplayBloodPercentage);
@@ -731,6 +770,41 @@ void LoadSettings()
 		
 		if (!bValidHudOrder) aEnemyHudOrder = { "Health", "Blood", "KO Shield" };
 	}
+	
+	
+	// Custom Colors
+	GetConfigValueBoolIfKeyExists("bCustomColorsUseStaticColorInsteadOfColorGradient", bCustomColorsUseStaticColorInsteadOfColorGradient);
+	
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsHealthPlayerLow", colorsCustomColorsHealthPlayer[0], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_HEALTH[0]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsHealthPlayerMedium", colorsCustomColorsHealthPlayer[1], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_HEALTH[1]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsHealthPlayerHigh", colorsCustomColorsHealthPlayer[2], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_HEALTH[2]);
+	
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsHealthEnemyLow", colorsCustomColorsHealthEnemy[0], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_HEALTH[0]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsHealthEnemyMedium", colorsCustomColorsHealthEnemy[1], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_HEALTH[1]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsHealthEnemyHigh", colorsCustomColorsHealthEnemy[2], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_HEALTH[2]);
+	
+	
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsBloodPlayerLow", colorsCustomColorsBloodPlayer[0], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_BLOOD[0]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsBloodPlayerMedium", colorsCustomColorsBloodPlayer[1], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_BLOOD[1]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsBloodPlayerHigh", colorsCustomColorsBloodPlayer[2], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_BLOOD[2]);
+	
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsBloodEnemyLow", colorsCustomColorsBloodEnemy[0], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_BLOOD[0]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsBloodEnemyMedium", colorsCustomColorsBloodEnemy[1], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_BLOOD[1]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsBloodEnemyHigh", colorsCustomColorsBloodEnemy[2], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_BLOOD[2]);
+	
+	
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsKOShieldPlayerLow", colorsCustomColorsKOShieldPlayer[0], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_KOSHIELD[0]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsKOShieldPlayerMedium", colorsCustomColorsKOShieldPlayer[1], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_KOSHIELD[1]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsKOShieldPlayerHigh", colorsCustomColorsKOShieldPlayer[2], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_KOSHIELD[2]);
+	
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsKOShieldEnemyLow", colorsCustomColorsKOShieldEnemy[0], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_KOSHIELD[0]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsKOShieldEnemyMedium", colorsCustomColorsKOShieldEnemy[1], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_KOSHIELD[1]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsKOShieldEnemyHigh", colorsCustomColorsKOShieldEnemy[2], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_KOSHIELD[2]);
+	
+	
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsVelocityPlayerLow", colorsCustomColorsVelocityPlayer[0], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_VELOCITY[0]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsVelocityPlayerMedium", colorsCustomColorsVelocityPlayer[1], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_VELOCITY[1]);
+	GetConfigValueVec4IfKeyExists("colorsCustomColorsVelocityPlayerHigh", colorsCustomColorsVelocityPlayer[2], vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_VELOCITY[2]);
 }
 
 void GetConfigValueBoolIfKeyExists(string sKey, bool& bVar)
@@ -754,6 +828,62 @@ void GetConfigValueFloatIfKeyExists(string sKey, float& iVar, float iLowerLimit,
 		iVar = GetConfigValueFloat(S_SETTINGS_PREFIX + sKey);
 		if (iVar < iLowerLimit || iVar > iUpperLimit) iVar = iDefaultOnError;
 	}
+}
+
+void SetConfigValueVec4(string sKey, vec4 vecVar)
+{
+	SetConfigValueString(sKey, __indexReadVec4(vecVar, 0) + "," + __indexReadVec4(vecVar, 1) + "," + __indexReadVec4(vecVar, 2) + "," + __indexReadVec4(vecVar, 3));
+}
+
+void GetConfigValueVec4IfKeyExists(string sKey, vec4& vecVar, vec4 vecLowerLimit, vec4 vecUpperLimit, vec4 vecDefaultOnError)
+{
+	if (ConfigHasKey(S_SETTINGS_PREFIX + sKey))
+	{
+		string sVar = GetConfigValueString(S_SETTINGS_PREFIX + sKey);
+		
+		// Check if it's three dimensional, non empty and within limits.
+		// The vector will be defaulted if one condition is not satisfied.
+				
+		array<string> aSplitVar = sVar.split(",");
+		
+		if (aSplitVar.length() != 4)
+		{
+			vecVar = vecDefaultOnError;
+			return;
+		}
+		
+		for (uint i = 0; i < aSplitVar.length(); ++i)
+		{
+			float fCurrentValue = parseFloat(aSplitVar[i]);
+		
+			if (aSplitVar[i] == "" || fCurrentValue < __indexReadVec4(vecLowerLimit, i) || fCurrentValue > __indexReadVec4(vecUpperLimit, i))
+			{
+				vecVar = vecDefaultOnError;
+				return;
+			}
+			
+			__indexWriteVec4(vecVar, i, fCurrentValue);
+		}
+	}
+}
+
+// Will be removed when there's an indexing operator for vec4.
+void __indexWriteVec4(vec4& vec, int index, float value)
+{
+	if (index == 0) vec.x = value;
+	else if (index == 1) vec.y = value;
+	else if (index == 2) vec.z = value;
+	else if (index == 3) vec.a = value;
+}
+
+float __indexReadVec4(vec4 vec, int index)
+{
+	if (index == 0) return vec.x;
+	else if (index == 1) return vec.y;
+	else if (index == 2) return vec.z;
+	else if (index == 3) return vec.a;
+	
+	return 99e99f;
 }
 
 void ImGui_PushDisableControls()

@@ -7,6 +7,9 @@ ToDo-List:
 	Try changing the character information passing to references,
 	this should help boost fps since the data doesn't has to be copied anymore.
 	
+	Transfer limits and default values to settings-definitions.as
+
+	Remove Color By Value
 
 	############################
 
