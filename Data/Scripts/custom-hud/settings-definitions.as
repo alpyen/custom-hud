@@ -1,6 +1,8 @@
+#include "custom-hud/GUI/default-colors.as"
+
 const string S_MOD_ID = "custom-hud";
 const string S_MOD_NAME = "Custom HUD";
-const string S_MOD_VERSION = "2.1.2";
+const string S_MOD_VERSION = "2.2.0";
 
 const string S_SETTINGS_PREFIX = S_MOD_ID + "-";
 
@@ -15,12 +17,13 @@ enum SettingsTab
 	StGeneralSettings,
 	StPlayerInformation,
 	StEnemyInformation,
+	StCustomColors,
 	StAboutAndHelp
 };
 
 enum PlayerHudStyles
 {
-	PhsStandardCustomHUD,
+	PhsStandardCustomHud,
 	PhsStatusbars
 };
 
@@ -42,7 +45,7 @@ const array<string> A_FONTS = {
 };
 
 // ===== General Settings =====
-bool bEnableCustomHUD = true;
+bool bEnableCustomHud = true;
 bool bShowPlayerPanel = true;
 bool bShowEnemyPanel = true;
 bool bShowDuringDialogues = false;
@@ -103,3 +106,18 @@ float fEnemyPanelTransparency = 0.0f;
 
 array<string> aEnemyHudOrder = { "Health", "Blood", "KO Shield" };
 // =======================================
+
+// ===== Custom Colors =====
+bool bCustomColorsUseStaticColorInsteadOfColorGradient = false;
+
+array<vec4> colorsCustomColorsHealthPlayer = COLORS_DEFAULT_HEALTH;
+array<vec4> colorsCustomColorsHealthEnemy = COLORS_DEFAULT_HEALTH;
+
+array<vec4> colorsCustomColorsBloodPlayer = COLORS_DEFAULT_BLOOD;
+array<vec4> colorsCustomColorsBloodEnemy = COLORS_DEFAULT_BLOOD;
+
+array<vec4> colorsCustomColorsKOShieldPlayer = COLORS_DEFAULT_KOSHIELD;
+array<vec4> colorsCustomColorsKOShieldEnemy = COLORS_DEFAULT_KOSHIELD;
+
+array<vec4> colorsCustomColorsVelocityPlayer = COLORS_DEFAULT_VELOCITY;
+// ======================

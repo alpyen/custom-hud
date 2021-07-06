@@ -1,5 +1,20 @@
 ToDo-List:
 
+	2.2.0 -
+	
+	Change Max/TemporaryCurrent values to float %
+	
+	Try changing the character information passing to references,
+	this should help boost fps since the data doesn't has to be copied anymore.
+	
+
+	############################
+
+	Add tooltips for Custom Colors page
+	Add saving mechanism for Custom Colors
+
+	Minimap
+
 	Co-Op Support:
 	
 		ScaleWithDistanceToPlayer
@@ -40,5 +55,5 @@ Possible Future Endeavours (in no special order):
 
 Warning:
 
-	Using .setElement on guiHUD.getMain() will conflict with an other element that set itself there already.
+	Using .setElement on guiHud.getMain() will conflict with an other element that set itself there already.
 	That's the reason why we use addFloatingElement throughout the whole mod.

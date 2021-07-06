@@ -1,17 +1,6 @@
 #include "custom-hud/character-info.as"
+#include "custom-hud/GUI/default-colors.as"
 
-const vec4 COLOR_MAX_HEALTH(0.0f, 0.4f, 0.0f, 1.0f);
-const vec4 COLOR_TEMPORARY_MAX_HEALTH(0.0f, 0.6f, 0.0f, 1.0f);
-const vec4 COLOR_CURRENT_HEALTH(0.0f, 1.0f, 0.0f, 1.0f);
-
-const vec4 COLOR_MAX_BLOOD(0.4f, 0.0f, 0.0f, 1.0f);
-const vec4 COLOR_CURRENT_BLOOD(1.0f, 0.0f, 0.0f, 1.0f);
-
-const vec4 COLOR_MAX_KOSHIELD(0.0f, 0.0f, 0.6f, 1.0f);
-const vec4 COLOR_CURRENT_KOSHIELD(0.0f, 0.0f, 1.0f, 1.0f);
-
-const vec4 COLOR_DEAD(0.2f, 0.2f, 0.2f, 1.0f);
-const vec4 COLOR_CURRENT_DEAD(0.4f, 0.4f, 0.4f, 1.0f);
 
 // Hud elements that are not supposed to be overlapped by others should start at this z position.
 // Keep in mind that mixing elements with the max-z order is still possible, this is mainly

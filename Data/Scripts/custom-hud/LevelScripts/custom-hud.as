@@ -6,7 +6,7 @@
 #include "custom-hud/GUI/hud-panels.as"
 #include "custom-hud/GUI/gui-helper.as"
 
-IMGUI@ guiHUD = CreateIMGUI();
+IMGUI@ guiHud = CreateIMGUI();
 
 Panel@ panelPlayer;
 Panel@ panelEnemy;
@@ -35,18 +35,18 @@ void Init(string level_name)
 {
 	LoadSettings();
 	
-	guiHUD.clear();
-	guiHUD.setup();
+	guiHud.clear();
+	guiHud.setup();
 	
-	ResizeGUIToFullscreen(guiHUD);
+	ResizeGUIToFullscreen(guiHud);
 		
 	switch (iPlayerPanelStyle)
 	{
-		case PhsStandardCustomHUD: @panelPlayer = StandardCustomHudPlayerPanel(guiHUD); break;
-		case PhsStatusbars: @panelPlayer = StatusbarsPlayerPanel(guiHUD); break;
+		case PhsStandardCustomHud: @panelPlayer = StandardCustomHudPlayerPanel(guiHud); break;
+		case PhsStatusbars: @panelPlayer = StatusbarsPlayerPanel(guiHud); break;
 	}
 	
-	@panelEnemy = StandardCustomHudEnemyPanel(guiHUD);
+	@panelEnemy = StandardCustomHudEnemyPanel(guiHud);
 }
 
 void Update(int is_paused)
@@ -62,7 +62,7 @@ void Update(int is_paused)
 
 	// If the mod is disabled, do not execute the rest of the Update code
 	// since we only need the part that brings us into the Custom HUD settings above.
-	if (!bEnableCustomHUD) return;
+	if (!bEnableCustomHud) return;
 	
 	// Check if the player ID is valid, if not get a new one.
 	if (iPlayerID == -1 || !ObjectExists(iPlayerID) || ReadObjectFromID(iPlayerID).GetType() != _movement_object || !ReadCharacterID(iPlayerID).controlled || ReadCharacterID(iPlayerID).controller_id != 0)
@@ -112,7 +112,7 @@ void Update(int is_paused)
 		if (bShowEnemyPanel) panelEnemy.UpdateInformation(aCharacterInformations);
 	}
 	
-	guiHUD.update();
+	guiHud.update();
 }
 
 void DrawGUI()
@@ -122,9 +122,9 @@ void DrawGUI()
 	if (!bShowDuringDialogues && level.DialogueCameraControl()) return;
 	
 	// Same reason as in Update()
-	if (!bEnableCustomHUD) return;
+	if (!bEnableCustomHud) return;
 	
-	guiHUD.render();
+	guiHud.render();
 }
 
 void ReceiveMessage(string message)
@@ -141,7 +141,7 @@ void ReceiveMessage(string message)
 void SetWindowDimensions(int width, int height)
 {
 	// Includes recalculations for the 3D to 2D conversion aswell. (RecalculateProjectionMatrix)
-	ResizeGUIToFullscreen(guiHUD, true);
+	ResizeGUIToFullscreen(guiHud, true);
 	
 	panelPlayer.Resize();
 	panelEnemy.Resize();

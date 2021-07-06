@@ -29,6 +29,9 @@ void DisplaySettingsGUI()
 		if (ImGui_TabButton("Enemy Information", stSelectedTab == StEnemyInformation)) stSelectedTab = StEnemyInformation;
 		ImGui_SameLine();
 		
+		if (ImGui_TabButton("Custom Colors", stSelectedTab == StCustomColors)) stSelectedTab = StCustomColors;
+		ImGui_SameLine();
+		
 		if (ImGui_TabButton("About & Help", stSelectedTab == StAboutAndHelp)) stSelectedTab = StAboutAndHelp;
 		
 		ImGui_Separator();
@@ -41,6 +44,7 @@ void DisplaySettingsGUI()
 				case StGeneralSettings: ImGui_CustomHudGeneralSettings(); break;
 				case StPlayerInformation: ImGui_CustomHudPlayerSettings(); break;
 				case StEnemyInformation: ImGui_CustomHudEnemySettings(); break;
+				case StCustomColors: ImGui_CustomHudCustomColorSettings(); break;
 				case StAboutAndHelp: ImGui_CustomHudAboutAndHelp(); break;
 			}	
 		ImGui_Unindent();	
@@ -51,20 +55,20 @@ void DisplaySettingsGUI()
 
 void ImGui_CustomHudGeneralSettings()
 {
-	ImGui_Checkbox(" Enable " + S_MOD_NAME, bEnableCustomHUD);
+	ImGui_Checkbox(" Enable " + S_MOD_NAME, bEnableCustomHud);
 	ImGui_SetTooltipOnHover("This will enable the Custom HUD mod with a simple switch,\nso you don't need to turn on/off the mod every time you want to use it.");
 	
 	ImGui_NewLine();
 	
 	ImGui_Indent();
-		if (!bEnableCustomHUD) ImGui_PushDisableControls();
+		if (!bEnableCustomHud) ImGui_PushDisableControls();
 		
 		if (ImGui_Checkbox(" Show player panel", bShowPlayerPanel)) panelPlayer.SetVisibility(bShowPlayerPanel);
 		if (ImGui_Checkbox(" Show enemy panel", bShowEnemyPanel)) panelEnemy.SetVisibility(bShowEnemyPanel);
 		ImGui_Checkbox(" Show during dialogues", bShowDuringDialogues);
 		ImGui_SetTooltipOnHover("Custom HUD is normally hidden during dialogues since it's not needed there.\nHowever some levels will hook into the DialogueCameraControl function and cause the hud to not show up.\n\nIf that is the case, enable this option to have the hud show at all times.\nPlease note however that the hud is still deactivate if the editor mode is active!");
 		
-		if (!bEnableCustomHUD) ImGui_PopDisableControls();
+		if (!bEnableCustomHud) ImGui_PopDisableControls();
 	ImGui_Unindent();
 	
 	ImGui_NewLine();
@@ -281,8 +285,8 @@ void ImGui_CustomHudPlayerSettings()
 		
 		switch (iPlayerPanelStyle)
 		{
-			case PhsStandardCustomHUD: @panelPlayer = StandardCustomHudPlayerPanel(guiHUD); break;
-			case PhsStatusbars: @panelPlayer = StatusbarsPlayerPanel(guiHUD); break;
+			case PhsStandardCustomHud: @panelPlayer = StandardCustomHudPlayerPanel(guiHud); break;
+			case PhsStatusbars: @panelPlayer = StatusbarsPlayerPanel(guiHud); break;
 		}
 	}
 }
@@ -381,10 +385,112 @@ void ImGui_CustomHudEnemySettings()
 	if (bRebuildEnemyPanel)
 	{	
 		panelEnemy.Destroy();
-		@panelEnemy = StandardCustomHudEnemyPanel(guiHUD);
+		@panelEnemy = StandardCustomHudEnemyPanel(guiHud);
 	}
 
 	ImGui_PopItemWidth();
+}
+
+void ImGui_CustomHudCustomColorSettings()
+{	
+	ImGui_Checkbox("Use static color (only high color) instead of color gradient", bCustomColorsUseStaticColorInsteadOfColorGradient);
+	ImGui_NewLine();
+	
+	ImGui_Text("Health:");		
+	ImGui_Indent();
+		
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Player - Low (0%), Medium (50%), High (100%):     ");
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsHealthPlayer[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsHealthPlayer[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsHealthPlayer[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Enemy  - Low (0%), Medium (50%), High (100%):     ");
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsHealthEnemy[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsHealthEnemy[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsHealthEnemy[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_Button("Copy from Player");
+		
+		
+	ImGui_Unindent();
+	ImGui_NewLine();
+	
+	ImGui_Text("Blood:");		
+	ImGui_Indent();
+		
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Player - Low (0%), Medium (50%), High (100%):     ");
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsBloodPlayer[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsBloodPlayer[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsBloodPlayer[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Enemy  - Low (0%), Medium (50%), High (100%):     ");
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsBloodEnemy[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsBloodEnemy[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsBloodEnemy[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_Button("Copy from Player");
+		
+	ImGui_Unindent();
+	ImGui_NewLine();
+	
+	ImGui_Text("KO Shield:");		
+	ImGui_Indent();
+		
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Player - Low (0%), Medium (50%), High (100%):     ");
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsKOShieldPlayer[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsKOShieldPlayer[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsKOShieldPlayer[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Enemy  - Low (0%), Medium (50%), High (100%):     ");
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsKOShieldEnemy[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsKOShieldEnemy[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsKOShieldEnemy[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_Button("Copy from Player");
+		
+	ImGui_Unindent();
+	ImGui_NewLine();
+	
+	ImGui_Text("Velocity:");		
+	ImGui_Indent();
+		
+		ImGui_AlignTextToFramePadding();
+		ImGui_Text("Player - Low (0u/s), Medium (4u/s), High (15u/s): ");
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsVelocityPlayer[0], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsVelocityPlayer[1], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		ImGui_SameLine();
+		ImGui_ColorEdit4("", colorsCustomColorsVelocityPlayer[2], ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha);
+		
+	ImGui_Unindent();
+	ImGui_NewLine();
+	
+	ImGui_Button("Reset all colors to default");
 }
 
 void ImGui_CustomHudAboutAndHelp()
@@ -464,7 +570,7 @@ void ImGui_SetTooltipOnHover(const string &in sLabel, bool bForceTooltipOnHover 
 void SaveSettings()
 {
 	// General Settings
-	SetConfigValueBool(S_SETTINGS_PREFIX + "bEnableCustomHUD", bEnableCustomHUD);
+	SetConfigValueBool(S_SETTINGS_PREFIX + "bEnableCustomHud", bEnableCustomHud);
 	SetConfigValueBool(S_SETTINGS_PREFIX + "bShowPlayerPanel", bShowPlayerPanel);
 	SetConfigValueBool(S_SETTINGS_PREFIX + "bShowEnemyPanel", bShowEnemyPanel);
 	SetConfigValueBool(S_SETTINGS_PREFIX + "bShowDuringDialogues", bShowDuringDialogues);
@@ -519,7 +625,7 @@ void LoadSettings()
 	// Since we are setting the defaults on declaration we simply ignore it for the booleans.
 	
 	// General Settings
-	GetConfigValueBoolIfKeyExists("bEnableCustomHUD", bEnableCustomHUD);
+	GetConfigValueBoolIfKeyExists("bEnableCustomHud", bEnableCustomHud);
 	GetConfigValueBoolIfKeyExists("bShowPlayerPanel", bShowPlayerPanel);
 	GetConfigValueBoolIfKeyExists("bShowEnemyPanel", bShowEnemyPanel);
 	GetConfigValueBoolIfKeyExists("bShowDuringDialogues", bShowDuringDialogues);
