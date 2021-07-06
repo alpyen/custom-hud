@@ -67,7 +67,6 @@ bool bPlayerDisplayHealthPercentage = true;
 bool bPlayerDisplayBloodPercentage = true;
 bool bPlayerDisplayKOShieldAmount = true;
 bool bPlayerDisplayVelocity = true;
-bool bPlayerColorByValue = true;
 
 int iPlayerSelectedHudOrderIndex = 0;
 
@@ -89,7 +88,6 @@ array<string> aPlayerHudOrder = { "Health", "Blood", "KO Shield", "Velocity" };
 bool bEnemyDisplayHealthPercentage = true;
 bool bEnemyDisplayBloodPercentage = true;
 bool bEnemyDisplayKOShieldAmount = true;
-bool bEnemyColorByValue = true;
 
 bool bEnemyScaleWithDistanceToPlayer = true;
 bool bEnemyShowEnemyPanelStyleAlsoOnPlayer = false;
@@ -121,3 +119,6 @@ array<vec4> colorsCustomColorsKOShieldEnemy = COLORS_DEFAULT_KOSHIELD;
 
 array<vec4> colorsCustomColorsVelocityPlayer = COLORS_DEFAULT_VELOCITY;
 // ======================
+
+bool bPlayerColorByValue=false;
+bool bEnemyColorByValue=false;

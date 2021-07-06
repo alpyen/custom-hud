@@ -5,7 +5,7 @@ ToDo-List:
 	Change Max/TemporaryCurrent values to float %
 	
 	Try changing the character information passing to references,
-	this should help boost fps since the data doesn't has to be copied anymore.
+	this should help boost fps since the data doesn't has to be copied anymore. (Also for saving)
 	
 	Transfer limits and default values to settings-definitions.as
 
