@@ -106,7 +106,8 @@ array<string> aEnemyHudOrder = { "Health", "Blood", "KO Shield" };
 // =======================================
 
 // ===== Custom Colors =====
-bool bCustomColorsUseStaticColorInsteadOfColorGradient = false;
+bool bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient = false;
+bool bCustomColorsUseStaticColorForEnemyInsteadOfColorGradient = false;
 
 array<vec4> colorsCustomColorsHealthPlayer = COLORS_DEFAULT_HEALTH;
 array<vec4> colorsCustomColorsHealthEnemy = COLORS_DEFAULT_HEALTH;
@@ -119,6 +120,3 @@ array<vec4> colorsCustomColorsKOShieldEnemy = COLORS_DEFAULT_KOSHIELD;
 
 array<vec4> colorsCustomColorsVelocityPlayer = COLORS_DEFAULT_VELOCITY;
 // ======================
-
-bool bPlayerColorByValue=false;
-bool bEnemyColorByValue=false;

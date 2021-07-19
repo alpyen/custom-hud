@@ -1,21 +1,5 @@
 ToDo-List:
 
-	2.2.0 -
-	
-	Change Max/TemporaryCurrent values to float %
-	
-	Try changing the character information passing to references,
-	this should help boost fps since the data doesn't has to be copied anymore. (Also for saving)
-	
-	Transfer limits and default values to settings-definitions.as
-
-	Remove Color By Value
-
-	############################
-
-	Add tooltips for Custom Colors page
-	Add saving mechanism for Custom Colors
-
 	Minimap
 
 	Co-Op Support:

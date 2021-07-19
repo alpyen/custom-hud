@@ -1,4 +1,5 @@
 #include "custom-hud/settings-definitions.as"
+#include "custom-hud/GUI/default-colors.as"
 #include "custom-hud/GUI/Panels/panel.as"
 
 class StandardCustomHudEnemyPanel : Panel
@@ -17,7 +18,7 @@ class StandardCustomHudEnemyPanel : Panel
 		@this.guiMain = guiMain;
 	}
 	
-	void UpdateInformation(array<CharacterInformation> ciCharacters)
+	void UpdateInformation(array<CharacterInformation>& ciCharacters)
 	{
 		if (this.aEnemyPanels.length() != ciCharacters.length()) this.aEnemyPanels.resize(ciCharacters.length());
 	
@@ -219,6 +220,20 @@ class StandardCustomHudEnemyPanelElement
 			{
 				this.posBaseHealth = posBar;
 				
+				vec4 colorMaxHealth(
+					F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].x,
+					F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].y,
+					F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].z,
+					1.0f
+				);
+				
+				vec4 colorTemporaryMaxHealth(
+					F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].x,
+					F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].y,
+					F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].z,
+					1.0f
+				);
+				
 				@this.imageHealthbarMax = IMImage("Textures/UI/whiteblock.tga");
 				@this.imageHealthbarTemporaryMax = IMImage("Textures/UI/whiteblock.tga");
 				@this.imageHealthbarCurrent = IMImage("Textures/UI/whiteblock.tga");
@@ -227,9 +242,9 @@ class StandardCustomHudEnemyPanelElement
 				this.imageHealthbarTemporaryMax.setSize(vec2(fBarWidth, fBarHeight));
 				this.imageHealthbarCurrent.setSize(vec2(fBarWidth, fBarHeight));
 				
-				this.imageHealthbarMax.setColor(COLOR_MAX_HEALTH);
-				this.imageHealthbarTemporaryMax.setColor(COLOR_TEMPORARY_MAX_HEALTH);
-				this.imageHealthbarCurrent.setColor(COLOR_CURRENT_HEALTH);
+				this.imageHealthbarMax.setColor(colorMaxHealth);
+				this.imageHealthbarTemporaryMax.setColor(colorTemporaryMaxHealth);
+				this.imageHealthbarCurrent.setColor(colorsCustomColorsHealthEnemy[2]);
 				
 				this.imageHealthbarMax.setAlpha(1.0f - fEnemyPanelTransparency);
 				this.imageHealthbarTemporaryMax.setAlpha(1.0f - fEnemyPanelTransparency);
@@ -243,14 +258,21 @@ class StandardCustomHudEnemyPanelElement
 			{
 				this.posBaseBlood = posBar;
 				
+				vec4 colorMaxBlood(
+					F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodEnemy[2].x,
+					F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodEnemy[2].y,
+					F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodEnemy[2].z,
+					1.0f
+				);
+				
 				@this.imageBloodbarMax = IMImage("Textures/UI/whiteblock.tga");
 				@this.imageBloodbarCurrent = IMImage("Textures/UI/whiteblock.tga");
 				
 				this.imageBloodbarMax.setSize(vec2(fBarWidth, fBarHeight));
 				this.imageBloodbarCurrent.setSize(vec2(fBarWidth, fBarHeight));
 				
-				this.imageBloodbarMax.setColor(COLOR_MAX_BLOOD);
-				this.imageBloodbarCurrent.setColor(COLOR_CURRENT_BLOOD);
+				this.imageBloodbarMax.setColor(colorMaxBlood);
+				this.imageBloodbarCurrent.setColor(colorsCustomColorsBloodEnemy[2]);
 				
 				this.imageBloodbarMax.setAlpha(1.0f - fEnemyPanelTransparency);
 				this.imageBloodbarCurrent.setAlpha(1.0f - fEnemyPanelTransparency);
@@ -262,14 +284,21 @@ class StandardCustomHudEnemyPanelElement
 			{
 				this.posBaseKOShield = posBar;
 				
+				vec4 colorMaxKOShield(
+					F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldEnemy[2].x,
+					F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldEnemy[2].y,
+					F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldEnemy[2].z,
+					1.0f
+				);
+					
 				@this.imageKOShieldbarMax = IMImage("Textures/UI/whiteblock.tga");
 				@this.imageKOShieldbarCurrent = IMImage("Textures/UI/whiteblock.tga");
 				
 				this.imageKOShieldbarMax.setSize(vec2(fBarWidth, fBarHeight));
 				this.imageKOShieldbarCurrent.setSize(vec2(fBarWidth, fBarHeight));
 				
-				this.imageKOShieldbarMax.setColor(COLOR_MAX_KOSHIELD);
-				this.imageKOShieldbarCurrent.setColor(COLOR_CURRENT_KOSHIELD);
+				this.imageKOShieldbarMax.setColor(colorMaxKOShield);
+				this.imageKOShieldbarCurrent.setColor(colorsCustomColorsKOShieldEnemy[2]);
 				
 				this.imageKOShieldbarMax.setAlpha(1.0f - fEnemyPanelTransparency);
 				this.imageKOShieldbarCurrent.setAlpha(1.0f - fEnemyPanelTransparency);
@@ -286,7 +315,7 @@ class StandardCustomHudEnemyPanelElement
 		this.SetVisibility(false);
 	}
 	
-	void UpdateElements(CharacterInformation ciCharacter, float fScalingFactor)
+	void UpdateElements(CharacterInformation& ciCharacter, float fScalingFactor)
 	{
 		if (this.iAmountOfElementsToDisplay == 0) return;
 		
@@ -301,7 +330,27 @@ class StandardCustomHudEnemyPanelElement
 			this.MoveAndResizeBar(this.imageHealthbarTemporaryMax, posBaseHealth, ciCharacter.fCurrentHealth, ciCharacter.fTemporaryMaxHealth, fScalingFactor);
 			this.MoveAndResizeBar(this.imageHealthbarCurrent, posBaseHealth, 0.0f, ciCharacter.fCurrentHealth, fScalingFactor);
 			
-			if (bEnemyColorByValue)
+			if (bCustomColorsUseStaticColorForEnemyInsteadOfColorGradient)
+			{
+				vec4 colorMaxHealth(
+					F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].x,
+					F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].y,
+					F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].z,
+					1.0f
+				);
+				
+				vec4 colorTemporaryMaxHealth(
+					F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].x,
+					F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].y,
+					F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].z,
+					1.0f
+				);
+			
+				this.imageHealthbarMax.setColor(colorMaxHealth);
+				this.imageHealthbarTemporaryMax.setColor(colorTemporaryMaxHealth);
+				this.imageHealthbarCurrent.setColor(colorsCustomColorsHealthEnemy[2]);
+			}
+			else
 			{
 				if (ciCharacter.bDead)
 				{
@@ -311,16 +360,31 @@ class StandardCustomHudEnemyPanelElement
 				}
 				else
 				{
-					this.imageHealthbarMax.setColor(COLOR_MAX_HEALTH);
-					this.imageHealthbarTemporaryMax.setColor(COLOR_TEMPORARY_MAX_HEALTH);
-					this.imageHealthbarCurrent.setColor(GetHealthbarColor(ciCharacter.fCurrentHealth));					
+					vec4 colorMaxHealth(
+						F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].x,
+						F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].y,
+						F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].z,
+						1.0f
+					);
+					
+					vec4 colorTemporaryMaxHealth(
+						F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].x,
+						F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].y,
+						F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthEnemy[2].z,
+						1.0f
+					);
+				
+					this.imageHealthbarMax.setColor(colorMaxHealth);
+					this.imageHealthbarTemporaryMax.setColor(colorTemporaryMaxHealth);
+					this.imageHealthbarCurrent.setColor(
+						GetStatusbarColor(
+							ciCharacter.fCurrentHealth,
+							colorsCustomColorsHealthEnemy[0],
+							colorsCustomColorsHealthEnemy[1],
+							colorsCustomColorsHealthEnemy[2]
+						)
+					);
 				}
-			}
-			else
-			{
-				this.imageHealthbarMax.setColor(COLOR_MAX_HEALTH);
-				this.imageHealthbarTemporaryMax.setColor(COLOR_TEMPORARY_MAX_HEALTH);
-				this.imageHealthbarCurrent.setColor(COLOR_CURRENT_HEALTH);
 			}
 			
 			this.imageHealthbarMax.setAlpha(1.0f - fEnemyPanelTransparency);
@@ -333,7 +397,19 @@ class StandardCustomHudEnemyPanelElement
 			this.MoveAndResizeBar(this.imageBloodbarMax, posBaseBlood, ciCharacter.fCurrentBlood, 1.0f, fScalingFactor);
 			this.MoveAndResizeBar(this.imageBloodbarCurrent, posBaseBlood, 0.0f, ciCharacter.fCurrentBlood, fScalingFactor);
 			
-			if (bEnemyColorByValue)
+			if (bCustomColorsUseStaticColorForEnemyInsteadOfColorGradient)
+			{
+				vec4 colorMaxBlood(
+					F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodEnemy[2].x,
+					F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodEnemy[2].y,
+					F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodEnemy[2].z,
+					1.0f
+				);
+			
+				this.imageBloodbarMax.setColor(colorMaxBlood);
+				this.imageBloodbarCurrent.setColor(colorsCustomColorsBloodEnemy[2]);
+			}
+			else
 			{
 				if (ciCharacter.bDead)
 				{
@@ -342,14 +418,23 @@ class StandardCustomHudEnemyPanelElement
 				}
 				else
 				{
-					this.imageBloodbarMax.setColor(COLOR_MAX_BLOOD);
-					this.imageBloodbarCurrent.setColor(GetBloodbarColor(ciCharacter.fCurrentBlood));			
+					vec4 colorMaxBlood(
+						F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodEnemy[2].x,
+						F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodEnemy[2].y,
+						F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodEnemy[2].z,
+						1.0f
+					);
+				
+					this.imageBloodbarMax.setColor(colorMaxBlood);
+					this.imageBloodbarCurrent.setColor(
+						GetStatusbarColor(
+							ciCharacter.fCurrentBlood,
+							colorsCustomColorsBloodEnemy[0],
+							colorsCustomColorsBloodEnemy[1],
+							colorsCustomColorsBloodEnemy[2]
+						)
+					);
 				}
-			}
-			else
-			{
-				this.imageBloodbarMax.setColor(COLOR_MAX_BLOOD);
-				this.imageBloodbarCurrent.setColor(COLOR_CURRENT_BLOOD);
 			}
 			
 			this.imageBloodbarMax.setAlpha(1.0f - fEnemyPanelTransparency);
@@ -364,7 +449,19 @@ class StandardCustomHudEnemyPanelElement
 			this.MoveAndResizeBar(this.imageKOShieldbarMax, posBaseKOShield, fKOShieldbarWidth, 1.0f, fScalingFactor);
 			this.MoveAndResizeBar(this.imageKOShieldbarCurrent, posBaseKOShield, 0.0f, fKOShieldbarWidth, fScalingFactor);
 			
-			if (bEnemyColorByValue)
+			if (bCustomColorsUseStaticColorForEnemyInsteadOfColorGradient)
+			{
+				vec4 colorMaxKOShield(
+					F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldEnemy[2].x,
+					F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldEnemy[2].y,
+					F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldEnemy[2].z,
+					1.0f
+				);
+			
+				this.imageKOShieldbarMax.setColor(colorMaxKOShield);
+				this.imageKOShieldbarCurrent.setColor(colorsCustomColorsKOShieldEnemy[2]);
+			}
+			else
 			{
 				if (ciCharacter.bDead)
 				{
@@ -373,14 +470,24 @@ class StandardCustomHudEnemyPanelElement
 				}
 				else
 				{
-					this.imageKOShieldbarMax.setColor(COLOR_MAX_KOSHIELD);
-					this.imageKOShieldbarCurrent.setColor(GetKOShieldbarColor(ciCharacter.iCurrentKOShield, ciCharacter.iMaxKOShield));			
+					vec4 colorMaxKOShield(
+						F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldEnemy[2].x,
+						F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldEnemy[2].y,
+						F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldEnemy[2].z,
+						1.0f
+					);
+				
+					this.imageKOShieldbarMax.setColor(colorMaxKOShield);
+					this.imageKOShieldbarCurrent.setColor(
+						GetKOShieldbarColor(
+							ciCharacter.iCurrentKOShield,
+							ciCharacter.iMaxKOShield,
+							colorsCustomColorsKOShieldEnemy[0],
+							colorsCustomColorsKOShieldEnemy[1],
+							colorsCustomColorsKOShieldEnemy[2]
+						)
+					);
 				}
-			}
-			else
-			{
-				this.imageKOShieldbarMax.setColor(COLOR_MAX_KOSHIELD);
-				this.imageKOShieldbarCurrent.setColor(COLOR_CURRENT_KOSHIELD);
 			}
 			
 			this.imageKOShieldbarMax.setAlpha(1.0f - fEnemyPanelTransparency);

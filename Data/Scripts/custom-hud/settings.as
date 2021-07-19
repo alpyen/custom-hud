@@ -118,9 +118,7 @@ void ImGui_CustomHudPlayerSettings()
 	ImGui_SameLine(240.0f); ImGui_Image(TEXTURE_VELOCITY, vec2(19.0f, 19.0f));
 	ImGui_SameLine(); ImGui_TextColored(HexColor("#FFFFFF"), "7.95");
 
-	ImGui_Checkbox(" Color by value", bPlayerColorByValue);
-	ImGui_SetTooltipOnHover("This option will color the health and blood values according\nto their current percentage indicating the status of the character.");
-	ImGui_SameLine(243.0f); ImGui_TextColored(HexColor("#00FF00"), "100"); ImGui_SameLine(); ImGui_TextColored(HexColor("#FFFF00"), "50"); ImGui_SameLine(); ImGui_TextColored(HexColor("#FF0000"), "0");
+	ImGui_NewLine();
 	ImGui_NewLine();
 
 	// Attention, this is just a crude workaround for Overgrowth 1.4
@@ -391,8 +389,9 @@ void ImGui_CustomHudCustomColorSettings()
 {
 	const int I_CUSTOM_COLORS_COLOR_EDIT_FLAG = ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoAlpha | ImGuiColorEditFlags_NoLabel;
 
-	ImGui_Checkbox(" Use static color (only high color) instead of color gradient", bCustomColorsUseStaticColorInsteadOfColorGradient);
-	ImGui_NewLine();
+	ImGui_Checkbox(" Use static color for player (only high color) instead of color gradient", bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient);
+	ImGui_Checkbox(" Use static color for enemy (only high color) instead of color gradient", bCustomColorsUseStaticColorForEnemyInsteadOfColorGradient);
+	// ImGui_NewLine();
 	
 	ImGui_Text("Health:");		
 	ImGui_Indent();
@@ -633,7 +632,8 @@ void SaveSettings()
 	
 	
 	// Custom Colors	
-	SetConfigValueBool(S_SETTINGS_PREFIX + "bCustomColorsUseStaticColorInsteadOfColorGradient", bCustomColorsUseStaticColorInsteadOfColorGradient);
+	SetConfigValueBool(S_SETTINGS_PREFIX + "bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient", bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient);
+	SetConfigValueBool(S_SETTINGS_PREFIX + "bCustomColorsUseStaticColorForEnemyInsteadOfColorGradient", bCustomColorsUseStaticColorForEnemyInsteadOfColorGradient);
 	
 	SetConfigValueArrayVec4(S_SETTINGS_PREFIX + "colorsCustomColorsHealthPlayer", colorsCustomColorsHealthPlayer);
 	SetConfigValueArrayVec4(S_SETTINGS_PREFIX + "colorsCustomColorsHealthEnemy", colorsCustomColorsHealthEnemy);
@@ -745,7 +745,8 @@ void LoadSettings()
 	
 	
 	// Custom Colors
-	GetConfigValueBoolIfKeyExists("bCustomColorsUseStaticColorInsteadOfColorGradient", bCustomColorsUseStaticColorInsteadOfColorGradient);
+	GetConfigValueBoolIfKeyExists("bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient", bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient);
+	GetConfigValueBoolIfKeyExists("bCustomColorsUseStaticColorForEnemyInsteadOfColorGradient", bCustomColorsUseStaticColorForEnemyInsteadOfColorGradient);
 	
 	GetConfigValueArrayVec4IfKeyExists("colorsCustomColorsHealthPlayer", colorsCustomColorsHealthPlayer, vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_HEALTH);
 	GetConfigValueArrayVec4IfKeyExists("colorsCustomColorsHealthEnemy", colorsCustomColorsHealthEnemy, vec4(0.0f, 0.0f, 0.0f, 1.0f), vec4(1.0f, 1.0f, 1.0f, 1.0f), COLORS_DEFAULT_HEALTH);

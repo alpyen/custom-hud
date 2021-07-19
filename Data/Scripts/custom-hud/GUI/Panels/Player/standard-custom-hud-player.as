@@ -1,4 +1,5 @@
 #include "custom-hud/settings-definitions.as"
+#include "custom-hud/GUI/default-colors.as"
 #include "custom-hud/GUI/Panels/panel.as"
 
 class StandardCustomHudPlayerPanel : Panel
@@ -120,7 +121,7 @@ class StandardCustomHudPlayerPanel : Panel
 		// The code for that is in UpdateInformation anyway so we might aswell live with the miscoloring for one frame on creation! :)
 	}
 		
-	void UpdateInformation(array<CharacterInformation> ciCharacters)
+	void UpdateInformation(array<CharacterInformation>& ciCharacters)
 	{
 		if (this.iAmountOfElementsToDisplay == 0) return;
 	
@@ -139,14 +140,24 @@ class StandardCustomHudPlayerPanel : Panel
 		{
 			this.textHealth.setText(formatFloat(ciPlayer.fCurrentHealth * 100.0f, "l"));
 			
-			if (bPlayerColorByValue)
+			if (bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient)
 			{
-				if (ciPlayer.bDead) this.textHealth.setColor(COLOR_DEAD);
-				else this.textHealth.setColor(GetHealthbarColor(ciPlayer.fCurrentHealth));
+				this.textHealth.setColor(colorsCustomColorsHealthPlayer[2]);
 			}
 			else
 			{
-				this.textHealth.setColor(vec4(1.0f));
+				if (ciPlayer.bDead)
+					this.textHealth.setColor(COLOR_DEAD);
+				else
+					this.textHealth.setColor(
+						GetStatusbarColor(
+							ciPlayer.fCurrentHealth,
+							colorsCustomColorsHealthPlayer[0],
+							colorsCustomColorsHealthPlayer[1],
+							colorsCustomColorsHealthPlayer[2]
+						)
+					);
+							
 			}
 			
 			this.imageHealth.setAlpha(1.0f - fPlayerPanelTransparency);
@@ -157,14 +168,23 @@ class StandardCustomHudPlayerPanel : Panel
 		{
 			this.textBlood.setText(formatFloat(ciPlayer.fCurrentBlood * 100.0f, "l"));
 		
-			if (bPlayerColorByValue)
+			if (bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient)
 			{
-				if (ciPlayer.bDead) this.textBlood.setColor(COLOR_DEAD);
-				else this.textBlood.setColor(GetBloodbarColor(ciPlayer.fCurrentBlood));
+				this.textBlood.setColor(colorsCustomColorsBloodPlayer[2]);
 			}
 			else
 			{
-				this.textBlood.setColor(vec4(1.0f));
+				if (ciPlayer.bDead)
+					this.textBlood.setColor(COLOR_DEAD);
+				else
+					this.textBlood.setColor(
+						GetStatusbarColor(
+							ciPlayer.fCurrentBlood,
+							colorsCustomColorsBloodPlayer[0],
+							colorsCustomColorsBloodPlayer[1],
+							colorsCustomColorsBloodPlayer[2]
+						)
+					);
 			}
 			
 			this.imageBlood.setAlpha(1.0f - fPlayerPanelTransparency);
@@ -175,14 +195,24 @@ class StandardCustomHudPlayerPanel : Panel
 		{
 			this.textKOShield.setText(formatInt(ciPlayer.iCurrentKOShield, ""));
 		
-			if (bPlayerColorByValue)
+			if (bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient)
 			{
-				if (ciPlayer.bDead) this.textKOShield.setColor(COLOR_DEAD);
-				else this.textKOShield.setColor(GetKOShieldbarColor(ciPlayer.iCurrentKOShield, ciPlayer.iMaxKOShield));
+				this.textKOShield.setColor(colorsCustomColorsKOShieldPlayer[2]);
 			}
 			else
 			{
-				this.textKOShield.setColor(vec4(1.0f));
+				if (ciPlayer.bDead)
+					this.textKOShield.setColor(COLOR_DEAD);
+				else
+					this.textKOShield.setColor(
+						GetKOShieldbarColor(
+							ciPlayer.iCurrentKOShield,
+							ciPlayer.iMaxKOShield,
+							colorsCustomColorsKOShieldPlayer[0],
+							colorsCustomColorsKOShieldPlayer[1],
+							colorsCustomColorsKOShieldPlayer[2]
+						)
+					);
 			}
 			
 			this.imageKOShield.setAlpha(1.0f - fPlayerPanelTransparency);
@@ -193,12 +223,25 @@ class StandardCustomHudPlayerPanel : Panel
 		{
 			this.textVelocity.setText(formatFloat(length(ciPlayer.moCharacter.velocity), "l", 0, 2));
 		
-			// Velocity is not colorable by value (since the range is inconsistent)
-			// We still check for bPlayerColorByValue because you can enable bColorByValue while being dead
-			// and that would result in inconsistent coloring.
-			if (bPlayerColorByValue && ciPlayer.bDead) this.textVelocity.setColor(COLOR_DEAD);
-			else this.textVelocity.setColor(vec4(1.0f));
-				
+			if (bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient)
+			{
+				this.textVelocity.setColor(colorsCustomColorsVelocityPlayer[2]);
+			}
+			else
+			{
+				if (ciPlayer.bDead)
+					this.textVelocity.setColor(COLOR_DEAD);
+				else
+					this.textVelocity.setColor(
+						GetStatusbarColor(
+							length(ciPlayer.moCharacter.velocity) / 20.0f,
+							colorsCustomColorsVelocityPlayer[0],
+							colorsCustomColorsVelocityPlayer[1],
+							colorsCustomColorsVelocityPlayer[2]
+						)
+					);
+			}
+			
 			this.imageVelocity.setAlpha(1.0f - fPlayerPanelTransparency);
 			this.textVelocity.setAlpha(1.0f - fPlayerPanelTransparency);
 		}	

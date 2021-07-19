@@ -11,7 +11,7 @@ const int I_MAX_Z_ORDER = 1000000;
 // the access to the panels a bit. Keeping it nice and clean.
 interface Panel
 {
-	void UpdateInformation(array<CharacterInformation> ciCharacters);	
+	void UpdateInformation(array<CharacterInformation>& ciCharacters);	
 	void SetVisibility(bool bVisible);
 	
 	void Reset(); // Called when the message post_reset is received.
@@ -26,25 +26,4 @@ interface Panel
 	// assigns it to the variable calling the destructor) but is not usable for us since we need
 	// to clean up beforehand.
 	void Destroy();
-}
-
-// Maybe add another parameter for max health, blood and ko shield?
-// Currently the max is 1 which requires the ko shield to be normalized first.
-
-vec4 GetHealthbarColor(float fHealth)
-{
-	if (fHealth <= 0.0f) return vec4(1.0f, 0.0f, 0.0f, 1.0f);
-	if (fHealth >= 0.5f) return vec4((1.0f - fHealth) * 2.0f, 1.0f, 0.0f, 1.0f);
-	return vec4(1.0f, fHealth * 2.0f, 0.0f, 1.0);
-}
-
-vec4 GetBloodbarColor(float fBlood)
-{
-	return vec4(1.0f - (0.4f - 0.4f * fBlood), 0.0f, 0.0f, 1.0f); 
-}
-
-vec4 GetKOShieldbarColor(int iCurrentKOShield, int iMaxKOShield)
-{
-	if (iMaxKOShield == 0) return vec4(1.0f);
-	else return vec4(1.0f - (float(iCurrentKOShield) / float(iMaxKOShield)), 1.0f - (float(iCurrentKOShield) / float(iMaxKOShield)), 1.0f, 1.0f);
 }

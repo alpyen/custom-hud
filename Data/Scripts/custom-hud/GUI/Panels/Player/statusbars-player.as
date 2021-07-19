@@ -1,4 +1,5 @@
 #include "custom-hud/settings-definitions.as"
+#include "custom-hud/GUI/default-colors.as"
 #include "custom-hud/GUI/Panels/panel.as"
 
 class StatusbarsPlayerPanel : Panel
@@ -164,7 +165,7 @@ class StatusbarsPlayerPanel : Panel
 		this.guiMain.getMain().moveElement(this.containerPanel.getName(), CalculatePanelPosition());
 	}	
 	
-	void UpdateInformation(array<CharacterInformation> ciCharacters)
+	void UpdateInformation(array<CharacterInformation>& ciCharacters)
 	{
 		if (this.iAmountOfElementsToDisplay == 0) return;
 	
@@ -191,7 +192,27 @@ class StatusbarsPlayerPanel : Panel
 			// but that clutters up the code and saves almost no performance.
 			this.textHealth.setText(formatFloat(ciPlayer.fCurrentHealth * 100.0f, "l"));
 			
-			if (bPlayerColorByValue)
+			if (bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient)
+			{
+				vec4 colorMaxHealth(
+					F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthPlayer[2].x,
+					F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthPlayer[2].y,
+					F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthPlayer[2].z,
+					1.0f
+				);
+				
+				vec4 colorTemporaryMaxHealth(
+					F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthPlayer[2].x,
+					F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthPlayer[2].y,
+					F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthPlayer[2].z,
+					1.0f
+				);
+			
+				this.imageHealthbarMax.setColor(colorMaxHealth);
+				this.imageHealthbarTemporaryMax.setColor(colorTemporaryMaxHealth);
+				this.imageHealthbarCurrent.setColor(colorsCustomColorsHealthPlayer[2]);
+			}
+			else
 			{
 				if (ciPlayer.bDead)
 				{
@@ -201,16 +222,31 @@ class StatusbarsPlayerPanel : Panel
 				}
 				else
 				{
-					this.imageHealthbarMax.setColor(COLOR_MAX_HEALTH);
-					this.imageHealthbarTemporaryMax.setColor(COLOR_TEMPORARY_MAX_HEALTH);
-					this.imageHealthbarCurrent.setColor(GetHealthbarColor(ciPlayer.fCurrentHealth));					
+					vec4 colorMaxHealth(
+						F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthPlayer[2].x,
+						F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthPlayer[2].y,
+						F_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthPlayer[2].z,
+						1.0f
+					);
+					
+					vec4 colorTemporaryMaxHealth(
+						F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthPlayer[2].x,
+						F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthPlayer[2].y,
+						F_TEMPORARY_MAX_HEALTH_MULTIPLY * colorsCustomColorsHealthPlayer[2].z,
+						1.0f
+					);
+				
+					this.imageHealthbarMax.setColor(colorMaxHealth);
+					this.imageHealthbarTemporaryMax.setColor(colorTemporaryMaxHealth);
+					this.imageHealthbarCurrent.setColor(
+						GetStatusbarColor(
+							ciPlayer.fCurrentHealth,
+							colorsCustomColorsHealthPlayer[0],
+							colorsCustomColorsHealthPlayer[1],
+							colorsCustomColorsHealthPlayer[2]
+						)
+					);
 				}
-			}
-			else
-			{
-				this.imageHealthbarMax.setColor(COLOR_MAX_HEALTH);
-				this.imageHealthbarTemporaryMax.setColor(COLOR_TEMPORARY_MAX_HEALTH);
-				this.imageHealthbarCurrent.setColor(COLOR_CURRENT_HEALTH);
 			}
 			
 			this.imageHealthbarMax.setAlpha(1.0f - fPlayerPanelTransparency);
@@ -227,7 +263,19 @@ class StatusbarsPlayerPanel : Panel
 		
 			this.textBlood.setText(formatFloat(ciPlayer.fCurrentBlood * 100.0f, "l"));
 			
-			if (bPlayerColorByValue)
+			if (bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient)
+			{
+				vec4 colorMaxBlood(
+					F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodPlayer[2].x,
+					F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodPlayer[2].y,
+					F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodPlayer[2].z,
+					1.0f
+				);
+			
+				this.imageBloodbarMax.setColor(colorMaxBlood);
+				this.imageBloodbarCurrent.setColor(colorsCustomColorsBloodPlayer[2]);
+			}
+			else
 			{
 				if (ciPlayer.bDead)
 				{
@@ -236,14 +284,23 @@ class StatusbarsPlayerPanel : Panel
 				}
 				else
 				{
-					this.imageBloodbarMax.setColor(COLOR_MAX_BLOOD);
-					this.imageBloodbarCurrent.setColor(GetBloodbarColor(ciPlayer.fCurrentBlood));					
+					vec4 colorMaxBlood(
+						F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodPlayer[2].x,
+						F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodPlayer[2].y,
+						F_MAX_BLOOD_MULTIPLY * colorsCustomColorsBloodPlayer[2].z,
+						1.0f
+					);
+				
+					this.imageBloodbarMax.setColor(colorMaxBlood);
+					this.imageBloodbarCurrent.setColor(
+						GetStatusbarColor(
+							ciPlayer.fCurrentBlood,
+							colorsCustomColorsBloodPlayer[0],
+							colorsCustomColorsBloodPlayer[1],
+							colorsCustomColorsBloodPlayer[2]
+						)
+					);
 				}
-			}
-			else
-			{
-				this.imageBloodbarMax.setColor(COLOR_MAX_BLOOD);
-				this.imageBloodbarCurrent.setColor(COLOR_CURRENT_BLOOD);
 			}
 			
 			this.imageBloodbarMax.setAlpha(1.0f - fPlayerPanelTransparency);
@@ -262,7 +319,19 @@ class StatusbarsPlayerPanel : Panel
 			
 			this.textKOShield.setText(formatFloat(ciPlayer.iCurrentKOShield, "l"));
 			
-			if (bPlayerColorByValue)
+			if (bCustomColorsUseStaticColorForPlayerInsteadOfColorGradient)
+			{
+				vec4 colorMaxKOShield(
+					F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldPlayer[2].x,
+					F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldPlayer[2].y,
+					F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldPlayer[2].z,
+					1.0f
+				);
+			
+				this.imageKOShieldbarMax.setColor(colorMaxKOShield);
+				this.imageKOShieldbarCurrent.setColor(colorsCustomColorsKOShieldPlayer[2]);
+			}
+			else
 			{
 				if (ciPlayer.bDead)
 				{
@@ -271,14 +340,24 @@ class StatusbarsPlayerPanel : Panel
 				}
 				else
 				{
-					this.imageKOShieldbarMax.setColor(COLOR_MAX_KOSHIELD);
-					this.imageKOShieldbarCurrent.setColor(GetKOShieldbarColor(ciPlayer.iCurrentKOShield, ciPlayer.iMaxKOShield));					
+					vec4 colorMaxKOShield(
+					F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldPlayer[2].x,
+					F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldPlayer[2].y,
+					F_MAX_KOSHIELD_MULTIPLY * colorsCustomColorsKOShieldPlayer[2].z,
+					1.0f
+				);
+				
+					this.imageKOShieldbarMax.setColor(colorMaxKOShield);
+					this.imageKOShieldbarCurrent.setColor(
+						GetKOShieldbarColor(
+							ciPlayer.iCurrentKOShield,
+							ciPlayer.iMaxKOShield,
+							colorsCustomColorsKOShieldPlayer[0],
+							colorsCustomColorsKOShieldPlayer[1],
+							colorsCustomColorsKOShieldPlayer[2]
+						)
+					);
 				}
-			}
-			else
-			{
-				this.imageKOShieldbarMax.setColor(COLOR_MAX_KOSHIELD);
-				this.imageKOShieldbarCurrent.setColor(COLOR_CURRENT_KOSHIELD);
 			}
 			
 			this.imageKOShieldbarMax.setAlpha(1.0f - fPlayerPanelTransparency);
